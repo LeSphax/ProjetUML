@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simpledraw;
-
-import java.awt.Graphics2D;
+package MVC;
 
 /**
  *
  * @author kerbrase
  */
-public class DrawingVue {
+public interface MyObserver {
     
-    
+    public void update(MyObservable o);
 }

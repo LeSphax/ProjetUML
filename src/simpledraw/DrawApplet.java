@@ -12,67 +12,75 @@ import javax.swing.JToggleButton;
 
 /**
  * SimpleDraw, applet version
+ *
  * @author Rémi Bastide
  * @version 1.0
  */
-
 public class DrawApplet
-	extends JApplet {
-	JToggleButton mySelectButton = new JToggleButton("Select");
-	JToggleButton myLineButton = new JToggleButton("Line");
-	JToggleButton myCircleButton = new JToggleButton("Circle");
-	DrawingPanel myDrawingPanel = new DrawingPanel();
+        extends JApplet {
 
-	/**Construct the applet*/
-	public DrawApplet() {
-	}
+    JToggleButton mySelectButton = new JToggleButton("Select");
+    JToggleButton myLineButton = new JToggleButton("Line");
+    JToggleButton myCircleButton = new JToggleButton("Circle");
+    DrawingPanel myDrawingPanel;
 
-	/**Initialize the applet*/
-	public void init() {
-		getContentPane().setLayout(new BorderLayout());
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout());
+    /**
+     * Construct the apple
+     *
+     * @param myDrawing
+     */
+    public DrawApplet(Drawing myDrawing) {
+        myDrawingPanel = new DrawingPanel(myDrawing);
+    }
 
-		mySelectButton.setSelected(true);
-		mySelectButton.setToolTipText("Select and move shapes");
-		myCircleButton.setToolTipText("Draw a Circle");
-		myLineButton.setToolTipText("Draw a Line");
+    /**
+     * Initialize the applet
+     */
+    public void init() {
+        getContentPane().setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
 
-		getContentPane().add(buttonPanel, BorderLayout.NORTH);
-		buttonPanel.add(mySelectButton, null);
-		buttonPanel.add(myLineButton, null);
-		buttonPanel.add(myCircleButton, null);
-		getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
+        mySelectButton.setSelected(true);
+        mySelectButton.setToolTipText("Select and move shapes");
+        myCircleButton.setToolTipText("Draw a Circle");
+        myLineButton.setToolTipText("Draw a Line");
 
-		ButtonGroup buttonGroup = new ButtonGroup();
-		buttonGroup.add(mySelectButton);
-		buttonGroup.add(myLineButton);
-		buttonGroup.add(myCircleButton);
+        getContentPane().add(buttonPanel, BorderLayout.NORTH);
+        buttonPanel.add(mySelectButton, null);
+        buttonPanel.add(myLineButton, null);
+        buttonPanel.add(myCircleButton, null);
+        getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
 
-		setSize(new Dimension(400, 300));
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(mySelectButton);
+        buttonGroup.add(myLineButton);
+        buttonGroup.add(myCircleButton);
 
-		mySelectButton.addActionListener(
-			new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				myDrawingPanel.activateSelectionTool();
-			}
-		}
-		);
+        setSize(new Dimension(400, 300));
 
-		myLineButton.addActionListener(
-			new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				myDrawingPanel.activateLineTool();
-			}
-		}
-		);
+        mySelectButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        myDrawingPanel.activateSelectionTool();
+                    }
+                }
+        );
 
-		myCircleButton.addActionListener(
-			new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				myDrawingPanel.activateCircleTool();
-			}
-		}
-		);
-	}
+        myLineButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        myDrawingPanel.activateLineTool();
+                    }
+                }
+        );
+
+        myCircleButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        myDrawingPanel.activateCircleTool();
+                    }
+                }
+        );
+    }
 }

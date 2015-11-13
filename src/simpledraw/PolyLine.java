@@ -22,9 +22,10 @@ public class PolyLine
 			throw new IllegalArgumentException(
 				"A PolyLine needs at least 2 Points");
 		}
-		myPoints = new ArrayList<Point>(points);
+		myPoints = new ArrayList<>(points);
 	}
 
+        @Override
 	public void translateBy(int dx, int dy) {
 		Iterator i = myPoints.iterator();
 		while (i.hasNext()) {
@@ -33,6 +34,7 @@ public class PolyLine
 		}
 	}
 
+        @Override
 	public void draw(Graphics2D g) {
 		g.setColor(
 			isSelected() ?

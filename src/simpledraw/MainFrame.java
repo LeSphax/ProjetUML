@@ -14,102 +14,108 @@ import javax.swing.JToggleButton;
 
 /**
  * Main Frame of SimpleDraw
+ *
  * @author Rémi Bastide
  * @version 1.0
  */
-
 public class MainFrame
-	extends JFrame {
-	JToggleButton mySelectButton = new JToggleButton("Select");
-        JToggleButton myGroupButton = new JToggleButton("Group");
-	JToggleButton myLineButton = new JToggleButton("Line");
-	JToggleButton myCircleButton = new JToggleButton("Circle");
-        
-	DrawingPanel myDrawingPanel = new DrawingPanel();
+        extends JFrame {
 
-	/**Construct the frame*/
-	public MainFrame() {
-		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
-		try {
-			jbInit();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    JToggleButton mySelectButton = new JToggleButton("Select");
+    JToggleButton myGroupButton = new JToggleButton("Group");
+    JToggleButton myLineButton = new JToggleButton("Line");
+    JToggleButton myCircleButton = new JToggleButton("Circle");
 
-	/**Component initialization*/
-	private void jbInit() throws Exception {
-		getContentPane().setLayout(new BorderLayout());
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout());
+    DrawingPanel myDrawingPanel;
 
-		mySelectButton.setSelected(true);
-		mySelectButton.setToolTipText("Select and move shapes");
-		myCircleButton.setToolTipText("Draw a Circle");
-		myLineButton.setToolTipText("Draw a Line");
-                myGroupButton.setToolTipText("The selected shapes are combined into a shape group, shapes can only be in one group");
+    /**
+     * Construct the frame
+     * @param myDrawing
+     */
+    public MainFrame(Drawing myDrawing) {
+        enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+        myDrawingPanel = new DrawingPanel(myDrawing);
+        try {
+            jbInit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		getContentPane().add(buttonPanel, BorderLayout.NORTH);
-		buttonPanel.add(mySelectButton, null);
-		buttonPanel.add(myLineButton, null);
-		buttonPanel.add(myCircleButton, null);
-                buttonPanel.add(myGroupButton,null);
-		getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
+    /**
+     * Component initialization
+     */
+    private void jbInit() throws Exception {
+        getContentPane().setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
 
-		ButtonGroup buttonGroup = new ButtonGroup();
-		buttonGroup.add(mySelectButton);
-                buttonGroup.add(myGroupButton);
-		buttonGroup.add(myLineButton);
-		buttonGroup.add(myCircleButton);
+        mySelectButton.setSelected(true);
+        mySelectButton.setToolTipText("Select and move shapes");
+        myCircleButton.setToolTipText("Draw a Circle");
+        myLineButton.setToolTipText("Draw a Line");
+        myGroupButton.setToolTipText("The selected shapes are combined into a shape group, shapes can only be in one group");
 
-		setSize(new Dimension(400, 300));
-		setTitle("Simple Draw");
+        getContentPane().add(buttonPanel, BorderLayout.NORTH);
+        buttonPanel.add(mySelectButton, null);
+        buttonPanel.add(myLineButton, null);
+        buttonPanel.add(myCircleButton, null);
+        buttonPanel.add(myGroupButton, null);
+        getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
 
-		mySelectButton.addActionListener(
-			new ActionListener() {
-                        @Override
-			public void actionPerformed(final ActionEvent e) {
-				myDrawingPanel.activateSelectionTool();
-			}
-		}
-		);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(mySelectButton);
+        buttonGroup.add(myGroupButton);
+        buttonGroup.add(myLineButton);
+        buttonGroup.add(myCircleButton);
 
-		myLineButton.addActionListener(
-			new ActionListener() {
-                        @Override
-			public void actionPerformed(final ActionEvent e) {
-				myDrawingPanel.activateLineTool();
-			}
-		}
-		);
+        setSize(new Dimension(400, 300));
+        setTitle("Simple Draw");
 
-		myCircleButton.addActionListener(
-			new ActionListener() {
-                        @Override
-			public void actionPerformed(final ActionEvent e) {
-				myDrawingPanel.activateCircleTool();
-			}
-		}
-		);
-                myGroupButton.addActionListener(
-			new ActionListener() {
-                        @Override
-			public void actionPerformed(final ActionEvent e) {
-				myDrawingPanel.groupButtonPressed();
-			}
-		}
-		);
-	}
+        mySelectButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent e) {
+                        myDrawingPanel.activateSelectionTool();
+                    }
+                }
+        );
 
-	/**
-         * Overridden so we can exit when window is closed.
-         */
-        @Override
-	protected final void processWindowEvent(final WindowEvent e) {
-		super.processWindowEvent(e);
-		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-			System.exit(0);
-		}
-	}
+        myLineButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent e) {
+                        myDrawingPanel.activateLineTool();
+                    }
+                }
+        );
+
+        myCircleButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent e) {
+                        myDrawingPanel.activateCircleTool();
+                    }
+                }
+        );
+        myGroupButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent e) {
+                        myDrawingPanel.groupButtonPressed();
+                    }
+                }
+        );
+    }
+
+    /**
+     * Overridden so we can exit when window is closed.
+     */
+    @Override
+    protected final void processWindowEvent(final WindowEvent e) {
+        super.processWindowEvent(e);
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+            System.exit(0);
+        }
+    }
 }
