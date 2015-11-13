@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simpledraw;
+package MVC;
 
 import MVC.CustomListModel;
 import MVC.MyObservable;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JList;
+import simpledraw.Drawing;
+import simpledraw.Shape;
 
 /**
  *

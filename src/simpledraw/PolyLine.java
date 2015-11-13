@@ -1,5 +1,6 @@
 package simpledraw;
 
+import Visitor.Visitor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -70,6 +71,11 @@ public class PolyLine
 
 		return result;
 	}
+
+    @Override
+    public String accept(Visitor v) {
+       return v.visitPolyLine(this);
+    }
 
 
 

@@ -6,6 +6,7 @@ package simpledraw;
  * @author Rémi Bastide
  * @version 1.0
  */
+import Visitor.Visitor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -81,5 +82,10 @@ public class Line
     @Override
     public String toString() {
         return "Line from (" + myStart.x + "," + myStart.y + ") to (" + myEnd.x + "," + myEnd.y + ")";
+    }
+
+    @Override
+    public String accept(Visitor v) {
+        return v.visitLine(this);
     }
 }

@@ -1,5 +1,7 @@
 package simpledraw;
 
+import MVC.SecondaryFrame;
+
 /**
  * Main program of SimpleDraw
  *
@@ -11,7 +13,7 @@ public class Main {
     /**
      * Construct the application
      */
-    public Main() {
+    public static void start() {
         Drawing myDrawing = new Drawing();
 
         MainFrame frame = new MainFrame(myDrawing);
@@ -32,6 +34,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        new Main();
+        start();
     }
 }

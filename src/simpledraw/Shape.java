@@ -5,6 +5,7 @@ package simpledraw;
  * @author Rémi Bastide
  * @version 1.0
  */
+import Visitor.Visitor;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
@@ -46,4 +47,6 @@ public abstract class Shape {
 	 * @return true if <code>p</code> inside the shape, false otherwise
 	 */
 	abstract public boolean isPickedBy(Point p);
+        
+        abstract public String accept(Visitor v);
 }

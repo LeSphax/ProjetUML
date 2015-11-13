@@ -1,5 +1,6 @@
 package simpledraw;
 
+import Visitor.Visitor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -19,7 +20,7 @@ public class Circle
      *
      * @param center The center of the circle
      * @param radius The radius of the circle
-	 *
+     *
      */
     public Circle(Point center, int radius) {
         myCenter = center;
@@ -50,6 +51,11 @@ public class Circle
     @Override
     public String toString() {
         return "Circle with (" + myCenter.x + "," + myCenter.y + ") as origin and a diameter of " + myRadius;
+    }
+
+    @Override
+    public String accept(Visitor v) {
+        return v.visitCircle(this);
     }
 
 }

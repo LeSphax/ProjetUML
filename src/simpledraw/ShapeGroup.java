@@ -5,6 +5,7 @@
  */
 package simpledraw;
 
+import Visitor.Visitor;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.LinkedList;
@@ -40,6 +41,11 @@ public class ShapeGroup extends Shape {
             }
         }
         return false;
+    }
+
+    @Override
+    public String accept(Visitor v) {
+        return v.visitGroup(this);
     }
 
 }
