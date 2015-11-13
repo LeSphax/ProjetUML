@@ -11,21 +11,21 @@ import simpledraw.Drawing;
 import simpledraw.Line;
 import simpledraw.PolyLine;
 import simpledraw.Shape;
-import simpledraw.ShapeGroup;
+import simpledraw.ShapeComposite;
 
 /**
  *
  * @author kerbrase
  */
-public abstract class Visitor {
+public interface Visitor {
 
    
-    public abstract String visit(Line line);
+    void visit(Line line);
 
-    public abstract String visit(Circle circle);
+    void visit(Circle circle);
 
-    public abstract String visit(ShapeGroup group);
+    void visit(ShapeComposite group);
 
-    public abstract String visit(PolyLine polyLine);
+    void visit(PolyLine polyLine);
 
 }

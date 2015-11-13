@@ -8,34 +8,32 @@ package visitor;
 import simpledraw.Circle;
 import simpledraw.Line;
 import simpledraw.PolyLine;
-import simpledraw.ShapeGroup;
-
+import simpledraw.ShapeComposite;
 /**
  *
  * @author kerbrase
  */
-public class VisitorJson extends Visitor {
+public class VisitorJson implements Visitor {
+
+    @Override
+    public void visit(Line line) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void visit(Circle circle) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void visit(ShapeComposite group) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void visit(PolyLine polyLine) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    
-
-    @Override
-    public String visit(Line line) {
-       return "<Line start=\"" ;
-    }
-
-    @Override
-    public String visit(Circle circle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String visit(ShapeGroup group) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String visit(PolyLine polyLine) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

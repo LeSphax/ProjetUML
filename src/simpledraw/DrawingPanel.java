@@ -99,5 +99,20 @@ public class DrawingPanel
     public void update(MyObservable o) {
         repaint();
     }
+    
+    void handlerGroupClicked() {
+//            terminate(myCurrentTool);
+//            myCurrentTool = new CircleTool(this);
+//            activate(myCurrentTool);
+        myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));    
+        for(Shape s : myDrawing.getSelection()){
+            myDrawing.deleteShape(s);
+        }
+        myDrawing.clearSelection();   
+    }
+
+    void handlerUngroupClicked() {        
+        myDrawing.ungroupSelection();
+    }
 
 }

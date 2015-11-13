@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -22,9 +23,10 @@ public class MainFrame
         extends JFrame {
 
     JToggleButton mySelectButton = new JToggleButton("Select");
-    JToggleButton myGroupButton = new JToggleButton("Group");
     JToggleButton myLineButton = new JToggleButton("Line");
     JToggleButton myCircleButton = new JToggleButton("Circle");
+    JButton myGroupButton = new JButton("Group");
+    JButton myUngroupButton = new JButton("Ungroup");
 
     DrawingPanel myDrawingPanel;
 
@@ -54,20 +56,24 @@ public class MainFrame
         mySelectButton.setToolTipText("Select and move shapes");
         myCircleButton.setToolTipText("Draw a Circle");
         myLineButton.setToolTipText("Draw a Line");
-        myGroupButton.setToolTipText("The selected shapes are combined into a shape group, shapes can only be in one group");
+        myGroupButton.setToolTipText("Group shapes");
+        myUngroupButton.setToolTipText("Ungroup shapes");
 
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         buttonPanel.add(mySelectButton, null);
         buttonPanel.add(myLineButton, null);
         buttonPanel.add(myCircleButton, null);
         buttonPanel.add(myGroupButton, null);
+        buttonPanel.add(myUngroupButton, null);
         getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(mySelectButton);
-        buttonGroup.add(myGroupButton);
         buttonGroup.add(myLineButton);
         buttonGroup.add(myCircleButton);
+        buttonGroup.add(myGroupButton);
+        buttonGroup.add(myUngroupButton);
+  
 
         setSize(new Dimension(400, 300));
         setTitle("Simple Draw");
@@ -98,14 +104,21 @@ public class MainFrame
                     }
                 }
         );
-        myGroupButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(final ActionEvent e) {
-                        myDrawingPanel.groupButtonPressed();
-                    }
-                }
-        );
+        myGroupButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.handlerGroupClicked();
+            }
+        });
+        
+        myUngroupButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.handlerUngroupClicked();
+            }
+        });
     }
 
     /**

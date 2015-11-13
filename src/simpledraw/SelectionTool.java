@@ -5,17 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * The tool to select, move and delete Shapes in the Drawing
- *
- * @author Rémi Bastide
- * @version 1.0
- */
-public class SelectionTool
+
+
+    
+ public class SelectionTool
         extends DrawingTool {
 
-    private Shape mySelectedShape = null;
     private Point myLastPoint;
 
     public SelectionTool(DrawingPanel panel) {
@@ -23,26 +21,34 @@ public class SelectionTool
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == KeyEvent.VK_DELETE) {
-            if (mySelectedShape != null) {
-                myDrawing.deleteShape(mySelectedShape);
+        if (e.getKeyChar() == KeyEvent.VK_DELETE) {  
+                for (Shape s : myDrawing.getSelection()) {
+                    myDrawing.deleteShape(s);
             }
         }
     }
 
-    @Override
     public void mousePressed(MouseEvent e) {
         Shape pickedShape = myDrawing.pickShapeAt(e.getPoint());
         myLastPoint = e.getPoint();
-        if (mySelectedShape != null) {
-            mySelectedShape.setSelected(false);
+
+        if (pickedShape == null) {
+            myDrawing.clearSelection();
+            return;
         }
-        mySelectedShape = pickedShape;
-        if (mySelectedShape != null) {
-            mySelectedShape.setSelected(true);
-            myPanel.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+
+        if (e.isShiftDown()) {
+            if(pickedShape.isSelected()){
+                pickedShape.setSelected(false);
+            }else{
+                pickedShape.setSelected(true);
+            }
+        } else {
+            myDrawing.clearSelection();
+            pickedShape.setSelected(true);
         }
-        myPanel.repaint();
+        myPanel.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+        myDrawing.setChanged();
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -50,8 +56,10 @@ public class SelectionTool
     }
 
     public void mouseMoved(MouseEvent e) {
-        Shape pickedShape = myPanel.myDrawing.pickShapeAt(e.getPoint());
+        Shape pickedShape = myDrawing.pickShapeAt(e.getPoint());
         if (pickedShape != null) {
+//                        myDrawing.clearSelection();
+//                        pickedShape.setSelected(true);
             myPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         } else {
             myPanel.setCursor(Cursor.getDefaultCursor());
@@ -59,18 +67,19 @@ public class SelectionTool
     }
 
     public void mouseDragged(MouseEvent e) {
-        if (mySelectedShape != null) {
-            mySelectedShape.translateBy(
+//		if (!listSelectedShape.isEmpty()) {
+        for (Shape s : myDrawing.getSelection()) {
+            s.translateBy(
                     e.getX() - myLastPoint.x,
                     e.getY() - myLastPoint.y
             );
-            myLastPoint = e.getPoint();
-            myDrawing.setChanged();
         }
+        myLastPoint = e.getPoint();
+               myDrawing.setChanged();
+//		}
     }
 
     void draw(Graphics2D g) {
     }
-
 
 }

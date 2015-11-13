@@ -12,6 +12,7 @@ import visitor.VisitorJson;
 import java.util.*;
 
 import java.awt.Point;
+import visitor.VisitorUngroup;
 
 public class Drawing extends MyObservable {
 
@@ -92,9 +93,30 @@ public class Drawing extends MyObservable {
     }
 
     public void accept(visitor.Visitor v) {
-        String result = "";
-        for (Shape s : myShapes) {
-            result += s.accept(v);
+//    String result = "";
+//        for (Shape s : myShapes) {
+//            result += s.accept(v);
+//        }
+        for(Shape s : getSelection()){
+            s.accept(v);
         }
+    }
+    
+
+    public List<Shape> getSelection() {
+        List<Shape> listSelected = new ArrayList<>();
+        for (Shape s : myShapes) {
+            if (s.isSelected()) {
+                listSelected.add(s);
+            }
+        }
+        return listSelected;
+    }
+    
+    void ungroupSelection() {
+        visitor.Visitor sv = new VisitorUngroup(this);
+        accept(sv);
+        clearSelection();
+        notifyObservers();
     }
 }

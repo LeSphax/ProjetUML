@@ -73,8 +73,8 @@ public class PolyLine
 	}
 
     @Override
-    public String accept(Visitor v) {
-       return v.visit(this);
+    public void accept(Visitor v) {
+       v.visit(this);
     }
 
     /**

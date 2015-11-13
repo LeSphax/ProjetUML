@@ -48,5 +48,5 @@ public abstract class Shape {
 	 */
 	abstract public boolean isPickedBy(Point p);
         
-        abstract public String accept(Visitor v);
+        abstract public void accept(Visitor v);
 }
