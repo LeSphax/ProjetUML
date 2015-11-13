@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MVC;
+package mvc;
 
-import MVC.CustomListModel;
-import MVC.MyObservable;
+import mvc.CustomListModel;
+import mvc.MyObservable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ import simpledraw.Shape;
  *
  * @author kerbrase
  */
-public class SecondaryFrame extends javax.swing.JFrame implements MVC.MyObserver {
+public class SecondaryFrame extends javax.swing.JFrame implements mvc.MyObserver {
 
     CustomListModel listModel;
 

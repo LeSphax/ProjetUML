@@ -1,7 +1,7 @@
 package simpledraw;
 
-import MVC.MyObservable;
-import MVC.MyObserver;
+import mvc.MyObservable;
+import mvc.MyObserver;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

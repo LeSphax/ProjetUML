@@ -65,7 +65,7 @@ public class SelectionTool
                     e.getY() - myLastPoint.y
             );
             myLastPoint = e.getPoint();
-            myDrawing.notifyObservers();
+            myDrawing.setChanged();
         }
     }
 

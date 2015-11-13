@@ -6,7 +6,7 @@ package simpledraw;
  * @author Rémi Bastide
  * @version 1.0
  */
-import Visitor.Visitor;
+import visitor.Visitor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -35,16 +35,16 @@ public class Line
                         ? Color.red
                         : Color.black
         );
-        g.drawLine(myStart.x, myStart.y, myEnd.x, myEnd.y);
+        g.drawLine(getMyStart().x, getMyStart().y, getMyEnd().x, getMyEnd().y);
     }
 
     public void translateBy(int dx, int dy) {
-        myStart.translate(dx, dy);
-        myEnd.translate(dx, dy);
+        getMyStart().translate(dx, dy);
+        getMyEnd().translate(dx, dy);
     }
 
     public boolean isPickedBy(Point p) {
-        return Line.segmentIsPickedBy(myStart, myEnd, p);
+        return Line.segmentIsPickedBy(getMyStart(), getMyEnd(), p);
     }
 
     /**
@@ -81,11 +81,25 @@ public class Line
 
     @Override
     public String toString() {
-        return "Line from (" + myStart.x + "," + myStart.y + ") to (" + myEnd.x + "," + myEnd.y + ")";
+        return "Line from (" + getMyStart().x + "," + getMyStart().y + ") to (" + getMyEnd().x + "," + getMyEnd().y + ")";
     }
 
     @Override
     public String accept(Visitor v) {
-        return v.visitLine(this);
+        return v.visit(this);
+    }
+
+    /**
+     * @return the myStart
+     */
+    public Point getMyStart() {
+        return myStart;
+    }
+
+    /**
+     * @return the myEnd
+     */
+    public Point getMyEnd() {
+        return myEnd;
     }
 }

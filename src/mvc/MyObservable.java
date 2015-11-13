@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MVC;
+package mvc;
 
 import java.util.Observer;
 import java.util.Vector;

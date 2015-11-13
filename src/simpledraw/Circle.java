@@ -1,6 +1,6 @@
 package simpledraw;
 
-import Visitor.Visitor;
+import visitor.Visitor;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -33,29 +33,43 @@ public class Circle
                         ? Color.red
                         : Color.black
         );
-        g.drawOval(myCenter.x - myRadius,
-                myCenter.y - myRadius,
-                myRadius * 2,
-                myRadius * 2
+        g.drawOval(getMyCenter().x - getMyRadius(),
+                getMyCenter().y - getMyRadius(),
+                getMyRadius() * 2,
+                getMyRadius() * 2
         );
     }
 
     public void translateBy(int dx, int dy) {
-        myCenter.translate(dx, dy);
+        getMyCenter().translate(dx, dy);
     }
 
     public boolean isPickedBy(Point p) {
-        return (Math.abs(myCenter.distance(p) - myRadius) <= 2);
+        return (Math.abs(getMyCenter().distance(p) - getMyRadius()) <= 2);
     }
 
     @Override
     public String toString() {
-        return "Circle with (" + myCenter.x + "," + myCenter.y + ") as origin and a diameter of " + myRadius;
+        return "Circle with (" + getMyCenter().x + "," + getMyCenter().y + ") as origin and a diameter of " + getMyRadius();
     }
 
     @Override
     public String accept(Visitor v) {
-        return v.visitCircle(this);
+        return v.visit(this);
+    }
+
+    /**
+     * @return the myCenter
+     */
+    public Point getMyCenter() {
+        return myCenter;
+    }
+
+    /**
+     * @return the myRadius
+     */
+    public int getMyRadius() {
+        return myRadius;
     }
 
 }

@@ -1,6 +1,6 @@
 package simpledraw;
 
-import MVC.SecondaryFrame;
+import mvc.SecondaryFrame;
 
 /**
  * Main program of SimpleDraw

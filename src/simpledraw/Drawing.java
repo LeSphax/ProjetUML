@@ -7,12 +7,13 @@ package simpledraw;
  * @version 1.0
  * @see simpledraw.Shape
  */
-import MVC.MyObservable;
+import mvc.MyObservable;
+import visitor.VisitorJson;
 import java.util.*;
 
 import java.awt.Point;
 
-public class Drawing extends MyObservable{
+public class Drawing extends MyObservable {
 
     /**
      * A drawing is a collection of shapes
@@ -26,7 +27,7 @@ public class Drawing extends MyObservable{
      * Add a shape to the Drawing
      *
      * @param s The Shape to add
-	 *
+     *
      */
     public void addShape(Shape s) {
         getMyShapes().add(s);
@@ -37,7 +38,7 @@ public class Drawing extends MyObservable{
      * Delete a shape from the Drawing
      *
      * @param s The Shape to delete
-	 *
+     *
      */
     public void deleteShape(Shape s) {
         getMyShapes().remove(s);
@@ -49,7 +50,7 @@ public class Drawing extends MyObservable{
      *
      * @param p The Point to test
      * @return A Shape selected by this Point or null if no Shape is there
-	 *
+     *
      */
     public Shape pickShapeAt(Point p) {
         Shape result = null;
@@ -77,5 +78,23 @@ public class Drawing extends MyObservable{
      */
     public List<Shape> getMyShapes() {
         return myShapes;
+    }
+    
+    public void setChanged(){
+        notifyObservers();
+    }
+
+    public void saveJson() {
+//        String result = "";
+//
+//        return result;
+        accept(new VisitorJson());
+    }
+
+    public void accept(visitor.Visitor v) {
+        String result = "";
+        for (Shape s : myShapes) {
+            result += s.accept(v);
+        }
     }
 }

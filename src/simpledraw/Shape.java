@@ -5,7 +5,7 @@ package simpledraw;
  * @author Rémi Bastide
  * @version 1.0
  */
-import Visitor.Visitor;
+import visitor.Visitor;
 import java.awt.Graphics2D;
 import java.awt.Point;
 

@@ -1,6 +1,6 @@
 package simpledraw;
 
-import Visitor.Visitor;
+import visitor.Visitor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,7 +28,7 @@ public class PolyLine
 
         @Override
 	public void translateBy(int dx, int dy) {
-		Iterator i = myPoints.iterator();
+		Iterator i = getMyPoints().iterator();
 		while (i.hasNext()) {
 			Point p = (Point) i.next();
 			p.translate(dx, dy);
@@ -43,7 +43,7 @@ public class PolyLine
 			Color.black
 			);
 
-		Iterator<Point> points = myPoints.iterator();
+		Iterator<Point> points = getMyPoints().iterator();
 		// A polyline has at least two points
 		Point last = points.next();
 		do {
@@ -56,7 +56,7 @@ public class PolyLine
 
 	public boolean isPickedBy(Point p) {
 		boolean result = false;
-		Iterator<Point> points = myPoints.iterator();
+		Iterator<Point> points = getMyPoints().iterator();
 		// A polyline has at least two points
 		Point last = points.next();
 		do {
@@ -74,7 +74,14 @@ public class PolyLine
 
     @Override
     public String accept(Visitor v) {
-       return v.visitPolyLine(this);
+       return v.visit(this);
+    }
+
+    /**
+     * @return the myPoints
+     */
+    public List<Point> getMyPoints() {
+        return myPoints;
     }
 
 
