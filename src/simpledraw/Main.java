@@ -17,6 +17,9 @@ public class Main {
         MainFrame frame = new MainFrame(myDrawing);
         frame.validate();
         frame.setVisible(true);
+        MainFrame mainFrame2 = new MainFrame(myDrawing);
+        mainFrame2.validate();
+        mainFrame2.setVisible(true);
         SecondaryFrame secondFrame = new SecondaryFrame(myDrawing);
         secondFrame.setLocation(500, 0);
         secondFrame.validate();

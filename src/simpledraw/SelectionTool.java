@@ -3,7 +3,6 @@ package simpledraw;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -27,14 +26,12 @@ public class SelectionTool
         if (e.getKeyChar() == KeyEvent.VK_DELETE) {
             if (mySelectedShape != null) {
                 myDrawing.deleteShape(mySelectedShape);
-                myPanel.repaint();
             }
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println(myDrawing);
         Shape pickedShape = myDrawing.pickShapeAt(e.getPoint());
         myLastPoint = e.getPoint();
         if (mySelectedShape != null) {
@@ -68,15 +65,12 @@ public class SelectionTool
                     e.getY() - myLastPoint.y
             );
             myLastPoint = e.getPoint();
-            myPanel.repaint();
+            myDrawing.notifyObservers();
         }
     }
 
     void draw(Graphics2D g) {
     }
 
-    void groupSelection() {
-        myDrawing.groupSelection();
-    }
 
 }
