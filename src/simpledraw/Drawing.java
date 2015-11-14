@@ -86,17 +86,17 @@ public class Drawing extends MyObservable {
     }
 
     public void saveJson() {
-//        String result = "";
-//
-//        return result;
         accept(new VisitorJson());
+    }
+    
+    public void ungroupSelection() {
+        visitor.Visitor sv = new VisitorUngroup(this);
+        accept(sv);
+        clearSelection();
+        notifyObservers();
     }
 
     public void accept(visitor.Visitor v) {
-//    String result = "";
-//        for (Shape s : myShapes) {
-//            result += s.accept(v);
-//        }
         for(Shape s : getSelection()){
             s.accept(v);
         }
@@ -111,12 +111,5 @@ public class Drawing extends MyObservable {
             }
         }
         return listSelected;
-    }
-    
-    public void ungroupSelection() {
-        visitor.Visitor sv = new VisitorUngroup(this);
-        accept(sv);
-        clearSelection();
-        notifyObservers();
     }
 }

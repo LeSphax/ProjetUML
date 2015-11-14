@@ -1,4 +1,3 @@
-
 package mvc;
 
 import simpledraw.CircleTool;
@@ -10,13 +9,12 @@ import simpledraw.SelectionTool;
 import simpledraw.Shape;
 import simpledraw.ShapeComposite;
 
-
-
 public class DrawingController {
+
     DrawingTool myCurrentTool;
     Drawing myDrawing;
     DrawingPanel myDrawingPanel;
-    
+
     public DrawingController(Drawing drawing, DrawingPanel drawingPanel) {
         myDrawingPanel = drawingPanel;
         myDrawing = drawing;
@@ -43,23 +41,19 @@ public class DrawingController {
         activate(myCurrentTool);
         myDrawing.clearSelection();
     }
-    
+
     public void handlerGroupClicked() {
-//            terminate(myCurrentTool);
-//            myCurrentTool = new CircleTool(this);
-//            activate(myCurrentTool);
-        System.out.println("mvc.DrawingController.handlerGroupClicked()");
-        myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));    
-        for(Shape s : myDrawing.getSelection()){
+        myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));
+        for (Shape s : myDrawing.getSelection()) {
             myDrawing.deleteShape(s);
         }
-        myDrawing.clearSelection();   
+        myDrawing.clearSelection();
     }
 
-    public void handlerUngroupClicked() {        
+    public void handlerUngroupClicked() {
         myDrawing.ungroupSelection();
     }
-    
+
     private void terminate(DrawingTool t) {
         myDrawingPanel.removeKeyListener(t);
         myDrawingPanel.removeMouseListener(t);
