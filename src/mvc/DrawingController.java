@@ -43,11 +43,13 @@ public class DrawingController {
     }
 
     public void handlerGroupClicked() {
-        myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));
-        for (Shape s : myDrawing.getSelection()) {
-            myDrawing.deleteShape(s);
+        if(!myDrawing.getSelection().isEmpty()){
+            myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));
+            for (Shape s : myDrawing.getSelection()) {
+                myDrawing.deleteShape(s);
+            }
+            myDrawing.clearSelection();
         }
-        myDrawing.clearSelection();
     }
 
     public void handlerUngroupClicked() {
