@@ -113,7 +113,7 @@ public class Drawing extends MyObservable {
         return listSelected;
     }
     
-    void ungroupSelection() {
+    public void ungroupSelection() {
         visitor.Visitor sv = new VisitorUngroup(this);
         accept(sv);
         clearSelection();

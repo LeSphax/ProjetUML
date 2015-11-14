@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JApplet;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -22,6 +23,9 @@ public class DrawApplet
     JToggleButton mySelectButton = new JToggleButton("Select");
     JToggleButton myLineButton = new JToggleButton("Line");
     JToggleButton myCircleButton = new JToggleButton("Circle");
+    JButton myGroupButton = new JButton("Group");
+    JButton myUngroupButton = new JButton("Ungroup");
+
     DrawingPanel myDrawingPanel;
 
     /**
@@ -45,42 +49,67 @@ public class DrawApplet
         mySelectButton.setToolTipText("Select and move shapes");
         myCircleButton.setToolTipText("Draw a Circle");
         myLineButton.setToolTipText("Draw a Line");
+        myGroupButton.setToolTipText("Group shapes");
+        myUngroupButton.setToolTipText("Ungroup shapes");
 
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         buttonPanel.add(mySelectButton, null);
         buttonPanel.add(myLineButton, null);
         buttonPanel.add(myCircleButton, null);
+        buttonPanel.add(myGroupButton, null);
+        buttonPanel.add(myUngroupButton, null);
         getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(mySelectButton);
         buttonGroup.add(myLineButton);
         buttonGroup.add(myCircleButton);
+        buttonGroup.add(myGroupButton);
+        buttonGroup.add(myUngroupButton);
 
         setSize(new Dimension(400, 300));
 
         mySelectButton.addActionListener(
                 new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        myDrawingPanel.activateSelectionTool();
-                    }
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.onSelectedClicked(e);
+            }
+        }
         );
 
         myLineButton.addActionListener(
                 new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        myDrawingPanel.activateLineTool();
-                    }
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.onLineClicked(e);
+            }
+        }
         );
 
         myCircleButton.addActionListener(
                 new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        myDrawingPanel.activateCircleTool();
-                    }
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.onCircleClicked(e);
+            }
+        }
         );
+
+        myGroupButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.onGroupClicked(e);
+            }
+        });
+
+        myUngroupButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDrawingPanel.onUnGroupClicked(e);
+            }
+        });
     }
 }

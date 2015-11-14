@@ -5,10 +5,9 @@ import mvc.MyObserver;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.Iterator;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
+import mvc.DrawingController;
 
 /**
  * A Panel that displays a Drawing, and maintains a current DrawingTool<BR>
@@ -22,38 +21,15 @@ import javax.swing.JPanel;
 public class DrawingPanel
         extends JPanel implements MyObserver {
 
-    DrawingTool myCurrentTool;
     Drawing myDrawing;
+    DrawingController myController;
 
     public DrawingPanel(Drawing drawing) {
         super();
         setBackground(java.awt.Color.white);
         myDrawing = drawing;
+        myController = new DrawingController(drawing, this);
         myDrawing.addObserver(this);
-        myCurrentTool = new SelectionTool(this);
-        activate(myCurrentTool);
-    }
-
-    void activateSelectionTool() {
-        terminate(myCurrentTool);
-        myCurrentTool = new SelectionTool(this);
-        activate(myCurrentTool);
-    }
-
-    void activateCircleTool() {
-        terminate(myCurrentTool);
-        myCurrentTool = new CircleTool(this);
-        activate(myCurrentTool);
-        myDrawing.clearSelection();
-        repaint();
-    }
-
-    void activateLineTool() {
-        terminate(myCurrentTool);
-        myCurrentTool = new LineTool(this);
-        activate(myCurrentTool);
-        myDrawing.clearSelection();
-        repaint();
     }
 
     @Override
@@ -64,19 +40,7 @@ public class DrawingPanel
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHints(qualityHints);
         draw(g2);
-        myCurrentTool.draw(g2);
-    }
-
-    private void terminate(DrawingTool t) {
-        removeKeyListener(t);
-        removeMouseListener(t);
-        removeMouseMotionListener(t);
-    }
-
-    private void activate(DrawingTool t) {
-        addKeyListener(t);
-        addMouseListener(t);
-        addMouseMotionListener(t);
+        myController.getMyCurrentTool().draw(g2);
     }
 
     /**
@@ -91,28 +55,28 @@ public class DrawingPanel
         }
     }
 
-    void groupButtonPressed() {
-
-    }
-
     @Override
     public void update(MyObservable o) {
         repaint();
     }
-    
-    void handlerGroupClicked() {
-//            terminate(myCurrentTool);
-//            myCurrentTool = new CircleTool(this);
-//            activate(myCurrentTool);
-        myDrawing.addShape(new ShapeComposite(myDrawing.getSelection()));    
-        for(Shape s : myDrawing.getSelection()){
-            myDrawing.deleteShape(s);
-        }
-        myDrawing.clearSelection();   
+
+    void onSelectedClicked(ActionEvent e) {
+        myController.activateSelectionTool();
     }
 
-    void handlerUngroupClicked() {        
-        myDrawing.ungroupSelection();
+    void onLineClicked(ActionEvent e) {
+        myController.activateLineTool();
     }
 
+    void onCircleClicked(ActionEvent e) {
+        myController.activateCircleTool();
+    }
+
+    void onGroupClicked(ActionEvent e) {
+        myController.handlerGroupClicked();
+    }
+
+    void onUnGroupClicked(ActionEvent e) {
+        myController.handlerUngroupClicked();
+    }
 }

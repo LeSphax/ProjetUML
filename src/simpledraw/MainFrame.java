@@ -36,8 +36,8 @@ public class MainFrame
      */
     public MainFrame(Drawing myDrawing) {
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
-        myDrawingPanel = new DrawingPanel(myDrawing);
         try {
+            myDrawingPanel = new DrawingPanel(myDrawing);
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class MainFrame
                 new ActionListener() {
                     @Override
                     public void actionPerformed(final ActionEvent e) {
-                        myDrawingPanel.activateSelectionTool();
+                        myDrawingPanel.onSelectedClicked(e);
                     }
                 }
         );
@@ -91,7 +91,7 @@ public class MainFrame
                 new ActionListener() {
                     @Override
                     public void actionPerformed(final ActionEvent e) {
-                        myDrawingPanel.activateLineTool();
+                        myDrawingPanel.onLineClicked(e);
                     }
                 }
         );
@@ -100,7 +100,7 @@ public class MainFrame
                 new ActionListener() {
                     @Override
                     public void actionPerformed(final ActionEvent e) {
-                        myDrawingPanel.activateCircleTool();
+                        myDrawingPanel.onCircleClicked(e);
                     }
                 }
         );
@@ -108,7 +108,7 @@ public class MainFrame
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                myDrawingPanel.handlerGroupClicked();
+                myDrawingPanel.onGroupClicked(e);
             }
         });
         
@@ -116,7 +116,7 @@ public class MainFrame
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                myDrawingPanel.handlerUngroupClicked();
+                myDrawingPanel.onUnGroupClicked(e);
             }
         });
     }

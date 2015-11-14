@@ -64,6 +64,11 @@ public class ShapeComposite extends Shape {
     public List<Shape> getChildren() {
         return myShapes;
     }
+    
+    @Override
+    public String toString() {
+        return "Group composed of " + myShapes.size() + " shapes";
+    }
 
     @Override
     public void accept(Visitor v) {
