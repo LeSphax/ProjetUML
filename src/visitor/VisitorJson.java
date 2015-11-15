@@ -18,11 +18,11 @@ import com.google.gson.Gson;
  */
 public class VisitorJson implements Visitor {
 
-    private String result;
+    private StringBuilder result;
     private final Gson gson;
 
     public VisitorJson() {
-        result = "";
+        result = new StringBuilder();
         final GsonBuilder builder = new GsonBuilder();
 
         gson = builder.create();
@@ -30,30 +30,30 @@ public class VisitorJson implements Visitor {
 
     @Override
     public void visit(Line line) {
-        result += gson.toJson(line);
+        result.append(gson.toJson(line));
         System.out.println(result);
     }
 
     @Override
     public void visit(Circle circle) {
-        result += gson.toJson(circle);
+        result.append(gson.toJson(circle));
     }
 
     @Override
     public void visit(ShapeComposite group) {
-        result += gson.toJson(group);
+        result.append(gson.toJson(group));
     }
 
     @Override
     public void visit(PolyLine polyLine) {
-        result += gson.toJson(polyLine);
+        result.append(gson.toJson(polyLine));
     }
 
     /**
      * @return the result
      */
     public String getResult() {
-        return result;
+        return result.toString();
     }
 
 }
