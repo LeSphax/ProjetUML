@@ -12,6 +12,8 @@ import visitor.VisitorJson;
 import java.util.*;
 
 import java.awt.Point;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import visitor.VisitorUngroup;
 
 public class Drawing extends MyObservable {
@@ -19,7 +21,7 @@ public class Drawing extends MyObservable {
     /**
      * A drawing is a collection of shapes
      */
-    private final List<Shape> myShapes = new LinkedList<>();
+    private final LinkedList<Shape> myShapes = new LinkedList<>();
 
     public Drawing() {
     }
@@ -80,15 +82,19 @@ public class Drawing extends MyObservable {
     public List<Shape> getMyShapes() {
         return myShapes;
     }
-    
-    public void setChanged(){
+
+    public void setChanged() {
         notifyObservers();
     }
 
-    public void saveJson() {
-        accept(new VisitorJson());
+    public void saveJson() throws FileNotFoundException {
+        VisitorJson visitorJson = new VisitorJson();
+        accept(visitorJson);
+        PrintWriter out = new PrintWriter("Saving.txt");
+        out.print(visitorJson.getResult());
+        out.close();
     }
-    
+
     public void ungroupSelection() {
         visitor.Visitor sv = new VisitorUngroup(this);
         accept(sv);
@@ -97,11 +103,11 @@ public class Drawing extends MyObservable {
     }
 
     public void accept(visitor.Visitor v) {
-        for(Shape s : getSelection()){
+        LinkedList<Shape> copy = (LinkedList) myShapes.clone();
+        for (Shape s : copy) {
             s.accept(v);
         }
     }
-    
 
     public List<Shape> getSelection() {
         List<Shape> listSelected = new ArrayList<>();

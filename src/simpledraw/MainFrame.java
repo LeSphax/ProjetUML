@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,8 +30,10 @@ public class MainFrame
     JToggleButton myCircleButton = new JToggleButton("Circle");
     JButton myGroupButton = new JButton("Group");
     JButton myUngroupButton = new JButton("Ungroup");
+    JButton mySaveButton = new JButton("Save");
 
     DrawingPanel myDrawingPanel;
+    Drawing myDrawing;
 
     /**
      * Construct the frame
@@ -38,6 +43,7 @@ public class MainFrame
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
         try {
             myDrawingPanel = new DrawingPanel(myDrawing);
+            this.myDrawing = myDrawing;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +64,7 @@ public class MainFrame
         myLineButton.setToolTipText("Draw a Line");
         myGroupButton.setToolTipText("Group shapes");
         myUngroupButton.setToolTipText("Ungroup shapes");
+        mySaveButton.setToolTipText("Save to Json");
 
         getContentPane().add(buttonPanel, BorderLayout.NORTH);
         buttonPanel.add(mySelectButton, null);
@@ -65,6 +72,7 @@ public class MainFrame
         buttonPanel.add(myCircleButton, null);
         buttonPanel.add(myGroupButton, null);
         buttonPanel.add(myUngroupButton, null);
+        buttonPanel.add(mySaveButton,null);
         getContentPane().add(myDrawingPanel, BorderLayout.CENTER);
 
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -73,9 +81,10 @@ public class MainFrame
         buttonGroup.add(myCircleButton);
         buttonGroup.add(myGroupButton);
         buttonGroup.add(myUngroupButton);
+        buttonGroup.add(mySaveButton);
   
 
-        setSize(new Dimension(400, 300));
+        setSize(new Dimension(800,800));
         setTitle("Simple Draw");
 
         mySelectButton.addActionListener(
@@ -117,6 +126,17 @@ public class MainFrame
             @Override
             public void actionPerformed(ActionEvent e) {
                 myDrawingPanel.onUnGroupClicked(e);
+            }
+        });
+        mySaveButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    myDrawing.saveJson();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

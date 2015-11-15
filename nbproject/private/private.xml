@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/Main.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/LineTool.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/Circle.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/CircleTool.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/simpledraw.dfPackage</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/ShapeGroup.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/Shape.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/SelectionTool.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/PolyLine.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/MainFrame.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/Line.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/DrawingTool.java</file>
-            <file>file:/V:/UML/Nouveau%20dossier/SimpleDrawInitial/SimpleDrawInitial/src/simpledraw/DrawingPanel.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

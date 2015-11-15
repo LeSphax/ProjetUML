@@ -5,12 +5,9 @@
  */
 package visitor;
 
-import java.util.List;
 import simpledraw.Circle;
-import simpledraw.Drawing;
 import simpledraw.Line;
 import simpledraw.PolyLine;
-import simpledraw.Shape;
 import simpledraw.ShapeComposite;
 
 /**

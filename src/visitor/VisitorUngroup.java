@@ -12,12 +12,11 @@ import simpledraw.PolyLine;
 import simpledraw.Shape;
 import simpledraw.ShapeComposite;
 
-public class VisitorUngroup implements Visitor{
-
+public class VisitorUngroup implements Visitor {
 
     private Drawing drawing;
 
-    public VisitorUngroup(Drawing d){
+    public VisitorUngroup(Drawing d) {
         drawing = d;
     }
 
@@ -31,14 +30,16 @@ public class VisitorUngroup implements Visitor{
 
     @Override
     public void visit(ShapeComposite group) {
-        for(Shape s : group.getChildren()){
-            drawing.addShape(s);
+        if (group.isSelected()) {
+            for (Shape s : group.getChildren()) {
+                drawing.addShape(s);
+            }
+            drawing.deleteShape(group);
         }
-        drawing.deleteShape(group);
     }
 
     @Override
     public void visit(PolyLine polyLine) {
     }
-    
+
 }
